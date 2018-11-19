@@ -207,10 +207,27 @@
   dependencies:
     tslib "^1.9.0"
 
+"@angular/pwa@^0.8.7":
+  version "0.8.7"
+  resolved "https://registry.yarnpkg.com/@angular/pwa/-/pwa-0.8.7.tgz#c76a0c91db2f5b623819c94611eb96f9c4683909"
+  integrity sha512-WHvzMcim1sq0oZclOqJtf/txM4KHIUAwm5zcZCbRFHgg7DZB3iCV2gayL1UtmYHdpC5InlEXCsZc1WRUW8NSjQ==
+  dependencies:
+    "@angular-devkit/core" "0.8.7"
+    "@angular-devkit/schematics" "0.8.7"
+    "@schematics/angular" "0.8.7"
+    typescript "~2.6.2"
+
 "@angular/router@^6.1.0":
   version "6.1.10"
   resolved "https://registry.yarnpkg.com/@angular/router/-/router-6.1.10.tgz#c7ee00897f6659b08378ea08d153d6f4c718004e"
   integrity sha512-tekI3dkdvd65oMoxjjgRA+16uDgPUBWHhYxids6pgO8vobZNtCo8VaVlcDyLUhdmtS5kONELx0iL5E2M0Y2Bag==
+  dependencies:
+    tslib "^1.9.0"
+
+"@angular/service-worker@^6.1.0":
+  version "6.1.10"
+  resolved "https://registry.yarnpkg.com/@angular/service-worker/-/service-worker-6.1.10.tgz#654aedeff0e60cbeca000d7aa4713d7111dd3e25"
+  integrity sha512-S2KYf1sW6LQsWDE6yBBiGWwoF0HqMST/7N+/Vs3cidNlIB9JS+DPNY6kAft+Ta5qheO7KOoZizxz6i1V5/LmLQ==
   dependencies:
     tslib "^1.9.0"
 
@@ -7412,6 +7429,11 @@ typedarray@^0.0.6:
   version "2.9.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.9.2.tgz#1cbf61d05d6b96269244eb6a3bce4bd914e0f00c"
   integrity sha512-Gr4p6nFNaoufRIY4NMdpQRNmgxVIGMs4Fcu/ujdYk3nAZqk7supzBE9idmvfZIlH/Cuj//dvi+019qEue9lV0w==
+
+typescript@~2.6.2:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.6.2.tgz#3c5b6fd7f6de0914269027f03c0946758f7673a4"
+  integrity sha1-PFtv1/beCRQmkCfwPAlGdY92c6Q=
 
 uglify-es@^3.3.4:
   version "3.3.9"
