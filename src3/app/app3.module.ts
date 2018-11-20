@@ -1,17 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { HttpClientModule } from '@angular/common/http';
+import { SwUpdatesService } from './sw-update.service';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { SwUpdateInterceptor } from './sw-update.interceptor';
+import { App3Component } from './app3.component';
 import { ModalQuestionModule } from './modal-question/modal-question.module';
 import { MatButtonModule, MatDialogModule } from '@angular/material';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [App3Component],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -24,6 +25,16 @@ import { MatButtonModule, MatDialogModule } from '@angular/material';
       enabled: environment.production
     })
   ],
-  bootstrap: [AppComponent]
+  providers: [
+    SwUpdatesService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SwUpdateInterceptor,
+      multi: true
+    }
+  ],
+  bootstrap: [App3Component]
 })
-export class AppModule {}
+export class App3Module {
+  constructor(swUpdateService: SwUpdatesService) {}
+}

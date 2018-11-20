@@ -7,6 +7,7 @@ import { filter, switchMap } from 'rxjs/operators';
 @Injectable()
 export class SwUpdateInterceptor implements HttpInterceptor {
   constructor(private swUpdatesService: SwUpdatesService) {}
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (req.url.startsWith('./assets/') || this.swUpdatesService.hasNewVersion$.getValue() === false) {
       return next.handle(req);

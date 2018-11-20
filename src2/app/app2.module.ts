@@ -9,6 +9,8 @@ import { environment } from '../environments/environment';
 import { SwUpdatesService } from './sw-update.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SwUpdateInterceptor } from './sw-update.interceptor';
+import { ModalQuestionModule } from './modal-question/modal-question.module';
+import { MatButtonModule, MatDialogModule } from '@angular/material';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,11 +19,15 @@ import { SwUpdateInterceptor } from './sw-update.interceptor';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MatDialogModule,
+    MatButtonModule,
+    ModalQuestionModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
     })
   ],
   providers: [
+    SwUpdatesService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: SwUpdateInterceptor,

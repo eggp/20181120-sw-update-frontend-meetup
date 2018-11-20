@@ -104,9 +104,9 @@
         }
       }
     },
-    "SwUpdateFrontendMeetup20181120_2": {
+    "project2": {
       "root": "",
-      "sourceRoot": "src",
+      "sourceRoot": "src2",
       "projectType": "application",
       "prefix": "app",
       "schematics": {
@@ -119,18 +119,18 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/SwUpdateFrontendMeetup20181120",
-            "index": "src/index.html",
-            "main": "src/main2.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "index": "src2/index.html",
+            "main": "src2/main2.ts",
+            "polyfills": "src2/polyfills.ts",
+            "tsConfig": "src2/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/manifest.json"
+              "src2/favicon.ico",
+              "src2/assets",
+              "src2/manifest.json"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+              "src2/styles.scss"
             ],
             "scripts": []
           },
@@ -138,8 +138,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "src2/environments/environment.ts",
+                  "with": "src2/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -158,45 +158,96 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "SwUpdateFrontendMeetup20181120:build"
+            "browserTarget": "project2:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "SwUpdateFrontendMeetup20181120:build:production"
+              "browserTarget": "project2:build:production"
             }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "SwUpdateFrontendMeetup20181120:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "karmaConfig": "src/karma.conf.js",
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
-            ],
-            "scripts": [],
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/manifest.json"
-            ]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
+              "src2/tsconfig.app.json",
+              "src2/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "project3": {
+      "root": "",
+      "sourceRoot": "src3",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/SwUpdateFrontendMeetup20181120",
+            "index": "src3/index.html",
+            "main": "src3/main3.ts",
+            "polyfills": "src3/polyfills.ts",
+            "tsConfig": "src3/tsconfig.app.json",
+            "assets": [
+              "src3/favicon.ico",
+              "src3/assets",
+              "src3/manifest.json"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src3/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src3/environments/environment.ts",
+                  "with": "src3/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "serviceWorker": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "project3:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "project3:build:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src3/tsconfig.app.json",
+              "src3/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

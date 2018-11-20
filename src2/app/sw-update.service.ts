@@ -3,6 +3,8 @@ import { SwUpdate } from '@angular/service-worker';
 import { BehaviorSubject, concat, interval, NEVER, Observable, Subject } from 'rxjs';
 import { first, map, take, takeUntil, tap } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
+import { openDialog } from './modal-question/function/open-dialog.function';
+import { MatDialog } from '@angular/material';
 
 /**
  * SwUpdatesService
@@ -21,7 +23,7 @@ export class SwUpdatesService implements OnDestroy {
 
   readonly hasNewVersion$ = new BehaviorSubject<boolean>(undefined);
 
-  constructor(appRef: ApplicationRef, private swu: SwUpdate, @Inject(DOCUMENT) private document: Document) {
+  constructor(appRef: ApplicationRef, readonly swu: SwUpdate, @Inject(DOCUMENT) private document: Document, private matDialog: MatDialog) {
     console.log('SW is enabled: ', swu.isEnabled);
 
     if (!swu.isEnabled) {
@@ -62,8 +64,9 @@ export class SwUpdatesService implements OnDestroy {
         }
         this.hasNewVersion$.next(true);
         this.swu.activateUpdate().then(() => {
-          alert('Verzió update van!');
-          // this.document.location.reload();
+          openDialog(this.matDialog, { title: 'Update', text: 'Has a new version!', okButtonText: 'OK' })
+            .afterClosed()
+            .subscribe(() => this.document.location.reload());
         });
       });
 
@@ -75,11 +78,11 @@ export class SwUpdatesService implements OnDestroy {
     );
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.onDestroy.next();
   }
 
-  private log(message: string) {
+  private log(message: string): void {
     const timestamp = new Date().toISOString();
     console.log(`[SwUpdates - ${timestamp}]: ${message}`);
   }
