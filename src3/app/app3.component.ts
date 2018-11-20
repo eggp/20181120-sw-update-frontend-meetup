@@ -1,10 +1,10 @@
-import { Component, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { SwUpdatesService } from './sw-update.service';
-import { environment } from '../environments/environment';
-import { openDialog } from './modal-question/function/open-dialog.function';
-import { MatDialog } from '@angular/material';
-import { DOCUMENT } from '@angular/common';
+import { Component, Inject } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { SwUpdatesService } from "./sw-update.service";
+import { environment } from "../environments/environment";
+import { openDialog } from "./modal-question/function/open-dialog.function";
+import { MatDialog } from "@angular/material";
+import { DOCUMENT } from "@angular/common";
 
 @Component({
   selector: 'app-root',
@@ -17,12 +17,12 @@ export class App3Component {
     private matDialog: MatDialog,
     @Inject(DOCUMENT) private document: Document
   ) {
-    this.detectRemoteOnlineVersion();
+    this.detectChangeRemoteVersion();
 
     this.getRequest();
   }
 
-  private detectRemoteOnlineVersion(): void {
+  private detectChangeRemoteVersion(): void {
     if (this.swUpdatesService.swu.isEnabled === false) {
       return;
     }
@@ -40,6 +40,8 @@ export class App3Component {
           if (data['path'] === '/' && data['data'] !== null && environment.VERSION !== data['data']) {
             console.warn('New version avaiable: ', data['data']);
             this.swUpdatesService.swu.checkForUpdate().then(() => {
+              this.swUpdatesService.hasNewVersion$.next(true);
+
               openDialog(this.matDialog, { title: 'Update', text: 'Has a new version', okButtonText: 'OK' })
                 .afterClosed()
                 .subscribe(() => this.document.location.reload());
@@ -57,7 +59,7 @@ export class App3Component {
 
   private getRequest(): void {
     this.http
-      .get('http://localhost:3000/posts')
+      .get('http://localhost:3000/postsa')
       .subscribe(
         () => openDialog(this.matDialog, { title: 'Test request', text: 'Success test request', okButtonText: 'OK' }),
         () => openDialog(this.matDialog, { title: 'Test request', text: 'Error test request', okButtonText: 'OK' })

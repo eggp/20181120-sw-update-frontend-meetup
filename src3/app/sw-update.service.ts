@@ -1,12 +1,14 @@
-import { ApplicationRef, Inject, Injectable, OnDestroy } from '@angular/core';
-import { SwUpdate } from '@angular/service-worker';
-import { BehaviorSubject, concat, interval, NEVER, Observable, Subject } from 'rxjs';
-import { first, map, take, takeUntil, tap } from 'rxjs/operators';
-import { DOCUMENT } from '@angular/common';
-import { openDialog } from './modal-question/function/open-dialog.function';
-import { MatDialog } from '@angular/material';
+import { ApplicationRef, Inject, Injectable, OnDestroy } from "@angular/core";
+import { SwUpdate } from "@angular/service-worker";
+import { BehaviorSubject, concat, interval, NEVER, Observable, Subject } from "rxjs";
+import { first, map, take, takeUntil, tap } from "rxjs/operators";
+import { DOCUMENT } from "@angular/common";
+import { openDialog } from "./modal-question/function/open-dialog.function";
+import { MatDialog } from "@angular/material";
 
 /**
+ * copy from: https://github.com/angular/angular/blob/master/aio/src/app/sw-updates/sw-updates.service.ts
+ *
  * SwUpdatesService
  *
  * @description

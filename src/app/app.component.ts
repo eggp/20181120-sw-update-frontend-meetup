@@ -26,14 +26,13 @@ export class AppComponent {
   }
 
   private checkSwUpdate(): void {
-    this.swUpdate.available.subscribe(() =>
+    this.swUpdate.available.subscribe(() => {
       this.swUpdate.activateUpdate().then(() => {
         console.warn('Has a new version');
-        openDialog(this.matDialog, { title: 'Update', text: 'Has a new version!', okButtonText: 'OK' })
-          .afterClosed()
-          .subscribe(() => this.document.location.reload());
-      })
-    );
+        alert('Has a new version');
+        this.document.location.reload();
+      });
+    });
     this.swUpdate.checkForUpdate();
   }
 

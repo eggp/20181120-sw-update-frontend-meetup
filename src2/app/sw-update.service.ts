@@ -1,12 +1,13 @@
-import { ApplicationRef, Inject, Injectable, OnDestroy } from '@angular/core';
-import { SwUpdate } from '@angular/service-worker';
-import { BehaviorSubject, concat, interval, NEVER, Observable, Subject } from 'rxjs';
-import { first, map, take, takeUntil, tap } from 'rxjs/operators';
-import { DOCUMENT } from '@angular/common';
-import { openDialog } from './modal-question/function/open-dialog.function';
-import { MatDialog } from '@angular/material';
+import { ApplicationRef, Inject, Injectable, OnDestroy } from "@angular/core";
+import { SwUpdate } from "@angular/service-worker";
+import { BehaviorSubject, concat, interval, NEVER, Observable, Subject } from "rxjs";
+import { first, map, take, takeUntil, tap } from "rxjs/operators";
+import { DOCUMENT } from "@angular/common";
+import { openDialog } from "./modal-question/function/open-dialog.function";
+import { MatDialog } from "@angular/material";
 
 /**
+ * copy from: https://github.com/angular/angular/blob/master/aio/src/app/sw-updates/sw-updates.service.ts
  * SwUpdatesService
  *
  * @description
@@ -21,6 +22,7 @@ export class SwUpdatesService implements OnDestroy {
   private onDestroy = new Subject<void>();
   updateActivated: Observable<string>;
 
+  // *
   readonly hasNewVersion$ = new BehaviorSubject<boolean>(undefined);
 
   constructor(appRef: ApplicationRef, readonly swu: SwUpdate, @Inject(DOCUMENT) private document: Document, private matDialog: MatDialog) {
@@ -28,10 +30,12 @@ export class SwUpdatesService implements OnDestroy {
 
     if (!swu.isEnabled) {
       this.updateActivated = NEVER.pipe(takeUntil(this.onDestroy));
+      // *
       this.hasNewVersion$.next(false);
       return;
     }
 
+    // *
     // elso check update status bevarasa
     const statusSubscription = this.swu['sw']
       ['eventsOfType']('STATUS')
@@ -59,6 +63,7 @@ export class SwUpdatesService implements OnDestroy {
         takeUntil(this.onDestroy)
       )
       .subscribe(() => {
+        // *
         if (!statusSubscription.closed) {
           statusSubscription.unsubscribe();
         }
