@@ -13,7 +13,7 @@ import { DOCUMENT } from '@angular/common';
  * 3. Whenever an update is available, it activates the update.
  *
  */
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class SwUpdatesService implements OnDestroy {
   private checkInterval = 1000 * 60 * 60 * 6; // 6 hours
   private onDestroy = new Subject<void>();

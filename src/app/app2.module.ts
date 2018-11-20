@@ -6,7 +6,9 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { HttpClientModule } from '@angular/common/http';
+import { SwUpdatesService } from './sw-update.service';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { SwUpdateInterceptor } from './sw-update.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +21,15 @@ import { HttpClientModule } from '@angular/common/http';
       enabled: environment.production
     })
   ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SwUpdateInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class App2Module {
+  constructor(swUpdateService: SwUpdatesService) {}
+}
