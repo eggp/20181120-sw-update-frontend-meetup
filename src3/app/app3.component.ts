@@ -23,9 +23,9 @@ export class App3Component {
   }
 
   private detectRemoteOnlineVersion(): void {
-    // if (this.swUpdatesService.swu.isEnabled === false) {
-    //   return;
-    // }
+    if (this.swUpdatesService.swu.isEnabled === false) {
+      return;
+    }
     try {
       let first = true;
       const source = new EventSource('https://frontendmeetup.firebaseio.com/versions/prod.json');
